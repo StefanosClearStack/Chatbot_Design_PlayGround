@@ -22,22 +22,33 @@
         height: 100vh;
         pointer-events: none;
       }
+      #overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+        z-index: 1000; /* Higher than other elements */
+      }
     </style>
   </head>
-  <body>
+  <body style="overflow: hidden;">
     <h1> Hello World </h1>
     <canvas id="confetti-canvas"></canvas>
     <div id="flat-chat"></div>
     <div id="voiceflow-chat-frame"></div>
+    <script src="https://cdn.voiceflow.com/widget/bundle.mjs" type="text/javascript"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 
     <!-- Calendly Link-->
     <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
-    <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+    <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async=""></script>
     
     <!-- Calendly link widget begin -->
     <script type="module">
-      import { CalendlyExtension } from '/static/extensions.js';
+      import { CalendlyExtension, popform } from '/static/extensions.js';
 
       (function (d, t) {
         var v = d.createElement(t),
@@ -46,7 +57,7 @@
           window.voiceflow.chat.load({
             verify: { projectID: '66885cf8515137fa4d3621ad' },
             url: 'https://general-runtime.voiceflow.com',
-            versionID: 'development',
+            versionID: 'production',
             user: {
               name: 'Demo User',
             },
@@ -57,7 +68,8 @@
             allowDangerousHTML: true,
             assistant: {
               extensions: [
-                CalendlyExtension
+                CalendlyExtension,
+                popform
               ],
             },
           });
@@ -68,5 +80,8 @@
       })(document, 'script');
     </script>
     <!-- Calendly link widget end -->
-  </body>
+
+    <div id="voiceflow-chat"></div>
+</body>
+
 </html>
